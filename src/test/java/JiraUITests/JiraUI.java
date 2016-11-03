@@ -14,17 +14,17 @@ import pages.NewIssuePage;
 import pages.LoginPage;
 import pages.UpdateIssuePage;
 
+import java.util.concurrent.TimeUnit;
+
 public class JiraUI {
     String issueKey = "";
 
 
-    protected WebDriver driver;
 
-    @BeforeTest
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("http://soft.it-hillel.com.ua:8080/login.jsp");
-        driver.manage().window().maximize();
+
+    //@BeforeTest
+    public void setUp(WebDriver driver) {
+        //WebDriver driver = tyt();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterUsername();
         loginPage.enterPassword();
@@ -35,12 +35,17 @@ public class JiraUI {
 
     @Test
     public void createIssue() {
+        WebDriver driver = tyt();
+        setUp(driver);
         NewIssuePage newIssuePage = new NewIssuePage(driver);
+
         newIssuePage.createBug();
+        newIssuePage.enterProject();
         newIssuePage.createSummary();
         newIssuePage.createAssignee();
         newIssuePage.getIssueKey();
         newIssuePage.deleteIssue();
+        driver.quit();
 
 
     }
@@ -48,6 +53,8 @@ public class JiraUI {
 
     @Test
     public void updateIssueAddComment() {
+        WebDriver driver = tyt();
+        setUp(driver);
         NewIssuePage newIssuePage = new NewIssuePage(driver);
         UpdateIssuePage updateIssuePage = new UpdateIssuePage(driver);
         newIssuePage.createBug();
@@ -56,27 +63,21 @@ public class JiraUI {
         updateIssuePage.getIssueKey();
 
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
         updateIssuePage.addComment();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         updateIssuePage.deleteIssue();
+        driver.quit();
 
 
         // TODO assert
     }
 
     @Test
-    public void updateIssueUpdateReporter() {
+    public void updateReporter() {
+        WebDriver driver = tyt();
+        setUp(driver);
         NewIssuePage newIssuePage = new NewIssuePage(driver);
         UpdateIssuePage updateIssuePage = new UpdateIssuePage(driver);
         newIssuePage.createBug();
@@ -85,19 +86,12 @@ public class JiraUI {
         updateIssuePage.getIssueKey();
 
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
         updateIssuePage.updateReporter();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         updateIssuePage.deleteIssue();
+        driver.quit();
 
 
         // TODO assert
@@ -105,6 +99,8 @@ public class JiraUI {
 
     @Test
     public void updatePriority() {
+        WebDriver driver = tyt();
+        setUp(driver);
         NewIssuePage newIssuePage = new NewIssuePage(driver);
         UpdateIssuePage updateIssuePage = new UpdateIssuePage(driver);
         newIssuePage.createBug();
@@ -113,19 +109,12 @@ public class JiraUI {
         updateIssuePage.getIssueKey();
 
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
         updateIssuePage.updatePriority();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         updateIssuePage.deleteIssue();
+        driver.quit();
 
 
         // TODO assert
@@ -133,6 +122,8 @@ public class JiraUI {
 
     @Test
     public void updateIssueTitle() {
+        WebDriver driver = tyt();
+        setUp(driver);
         NewIssuePage newIssuePage = new NewIssuePage(driver);
         UpdateIssuePage updateIssuePage = new UpdateIssuePage(driver);
         newIssuePage.createBug();
@@ -141,27 +132,29 @@ public class JiraUI {
         updateIssuePage.getIssueKey();
 
 
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         updateIssuePage.updateIssueTitle();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         updateIssuePage.deleteIssue();
+        driver.quit();
 
 
         // TODO assert
     }
+    public WebDriver tyt(){
+         WebDriver driver;
+
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS );
+        driver.get("http://soft.it-hillel.com.ua:8080/login.jsp");
+        driver.manage().window().maximize();
+        return driver;
+    }
 
 
-    @AfterTest
+   // @AfterTest
     public void tearDown() {
+        WebDriver driver = tyt();
 
 
         driver.close(); // TODO investigate why browser is not closed
@@ -170,10 +163,11 @@ public class JiraUI {
     }
 
 
-    @Test
+    //Test(priority =2)
     public void Logout() {
+        WebDriver driver = tyt();
         LogoutPage logout = new LogoutPage(driver);
-        logout.Logout();
+       logout.Logout();
 
     }
 

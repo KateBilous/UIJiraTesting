@@ -7,12 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.MyClass;
 
 import java.util.concurrent.TimeUnit;
 
 public class NewIssuePage {
     String issueKey = "";
     private WebDriver driver;
+    MyClass myClass = new MyClass();
 
 
     public NewIssuePage(WebDriver driver) {
@@ -20,12 +22,12 @@ public class NewIssuePage {
     }
 
     public void createBug() {
-        WebElement createButton = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='create_link']")));
+        myClass.waitForVisibilityByXpath(driver, "//*[@id='create_link']");
+        myClass.waitForClickableByXpath(driver, "//*[@id='create_link']");
+        WebElement createButton = driver.findElement(By.xpath("//*[@id='create_link']"));
         createButton.click();
 
-        WebElement issueType = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='issuetype-field']")));
+        WebElement issueType = driver.findElement(By.xpath("//*[@id='issuetype-field']"));
 
         issueType.clear();
         issueType.sendKeys("Bug");
@@ -33,16 +35,23 @@ public class NewIssuePage {
         issueType.sendKeys(Keys.ENTER);
 
     }
+    public void enterProject(){
+        String projectFieldXpath = "//*[@id=\"project-field\"]";
+
+        myClass.waitForVisibilityByXpath(driver, projectFieldXpath);
+        myClass.waitForClickableByXpath(driver, projectFieldXpath);
+
+        driver.findElement(By.xpath(projectFieldXpath)).click();
+        driver.findElement(By.xpath(projectFieldXpath)).clear();
+        driver.findElement(By.xpath(projectFieldXpath)).sendKeys("QAAUT", Keys.ENTER);
+    }
 
     public void createSummary() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        myClass.waitForVisibilityByXpath(driver,"//*[@id='summary']" );
+        myClass.waitForClickableByXpath(driver,"//*[@id='summary']" );
 
-        WebElement summary = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='summary']")));
+
+        WebElement summary = driver.findElement(By.xpath("//*[@id='summary']"));
         summary.clear();
         summary.sendKeys(" This summary was created via WebDriver");
 
