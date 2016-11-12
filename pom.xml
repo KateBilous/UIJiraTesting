@@ -9,12 +9,12 @@
     <version>1.0-SNAPSHOT</version>
 
 
-    <properties>
+    <assertionsAndWaits>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>1.4.23.HOTFIX1</allure.version>
         <aspectj.version>1.8.9</aspectj.version>
         <compiler.version>1.7</compiler.version>
-    </properties>
+    </assertionsAndWaits>
 
     <build>
         <plugins>

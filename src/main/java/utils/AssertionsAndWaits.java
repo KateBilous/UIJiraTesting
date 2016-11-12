@@ -16,12 +16,9 @@ import java.util.concurrent.TimeUnit;
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
 
-public class Properties {
+public class AssertionsAndWaits {
 
-    public void scrollPageUp(WebDriver driver) {
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("scroll(0, -250);");
-    }
+
 
     public void waitForVisibilityByXpath(WebDriver driver, String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -45,25 +42,7 @@ public class Properties {
 
 
     }
-    public WebDriver Grid(){
-        URL hostURL = null;
-        try {
-            hostURL = new URL("http://localhost:4444/wd/hub");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        DesiredCapabilities capability = DesiredCapabilities.chrome();
-        capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.LINUX);
 
-        WebDriver driver = new org.openqa.selenium.remote.RemoteWebDriver(hostURL, capability);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.get("http://soft.it-hillel.com.ua:8080/login.jsp");
-        // разворачивает окно браузера
-        driver.manage().window().maximize();
-        return driver;
-
-    }
 
     public static void  assertByTitle(WebDriver driver, String title) {
         String currentTitle = driver.getTitle();
