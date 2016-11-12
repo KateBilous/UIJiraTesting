@@ -5,16 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.MyClass;
+import utils.Properties;
 
 import java.util.concurrent.TimeUnit;
 
 public class NewIssuePage {
     String issueKey = "";
     private WebDriver driver;
-    MyClass myClass = new MyClass();
+    Properties properties = new Properties();
 
 
     public NewIssuePage(WebDriver driver) {
@@ -22,8 +20,8 @@ public class NewIssuePage {
     }
 
     public void createBug() {
-        myClass.waitForVisibilityByXpath(driver, "//*[@id='create_link']");
-        myClass.waitForClickableByXpath(driver, "//*[@id='create_link']");
+        properties.waitForVisibilityByXpath(driver, "//*[@id='create_link']");
+        properties.waitForClickableByXpath(driver, "//*[@id='create_link']");
         WebElement createButton = driver.findElement(By.xpath("//*[@id='create_link']"));
         createButton.click();
 
@@ -38,8 +36,8 @@ public class NewIssuePage {
     public void enterProject(){
         String projectFieldXpath = "//*[@id=\"project-field\"]";
 
-        myClass.waitForVisibilityByXpath(driver, projectFieldXpath);
-        myClass.waitForClickableByXpath(driver, projectFieldXpath);
+        properties.waitForVisibilityByXpath(driver, projectFieldXpath);
+        properties.waitForClickableByXpath(driver, projectFieldXpath);
 
         driver.findElement(By.xpath(projectFieldXpath)).click();
         driver.findElement(By.xpath(projectFieldXpath)).clear();
@@ -47,8 +45,8 @@ public class NewIssuePage {
     }
 
     public void createSummary() {
-        myClass.waitForVisibilityByXpath(driver,"//*[@id='summary']" );
-        myClass.waitForClickableByXpath(driver,"//*[@id='summary']" );
+        properties.waitForVisibilityByXpath(driver,"//*[@id='summary']" );
+        properties.waitForClickableByXpath(driver,"//*[@id='summary']" );
 
 
         WebElement summary = driver.findElement(By.xpath("//*[@id='summary']"));

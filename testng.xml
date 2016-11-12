@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="JIRA_UI_Tests" parallel="false" thread-count="2">
-    <test name="JiraTestsGRID">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel test suite" parallel="tests" thread-count="5">
+    <listeners>
+        <!--<listener class-name="utils.WebDriverListener"></listener>-->
+        <listener class-name="utils.TestListener"></listener>
+    </listeners>
+    <test name="Issue">
+        <parameter name="browserName" value="chrome"></parameter>
         <classes>
-            <class name="JiraUITests.JiraUI" />
+            <class name="JiraUITests.JiraUI"/>
         </classes>
     </test>
 </suite>

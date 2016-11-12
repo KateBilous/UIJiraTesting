@@ -5,7 +5,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -17,13 +16,14 @@ import pages.UpdateIssuePage;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.TestCaseId;
-import utils.MyClass;
+import utils.Properties;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class JiraUI {
+    Properties properties = new Properties();
     String issueKey = "";
     WebDriver driver = maxWinTimeout();
 
@@ -31,12 +31,18 @@ public class JiraUI {
 
     //@BeforeTest
     public void setUp(WebDriver driver) {
+        String newTitle = "[VRC-";
+        String title = "Log in - JIRA";
 
         LoginPage loginPage = new LoginPage(driver);
+
         driver.get("http://soft.it-hillel.com.ua:8080/login.jsp");
+        Properties.assertByTitle(driver, title);
         loginPage.enterUsername();
         loginPage.enterPassword();
         loginPage.clickLogin();
+        properties.waitForClickableByXpath(driver, "//*[@id='logo']/a/img");
+
 
 
     }
@@ -173,7 +179,6 @@ public class JiraUI {
         driver.manage().window().maximize();
         return driver;
     }
-
     public WebDriver Grid(){
         URL hostURL = null;
         try {
@@ -185,7 +190,7 @@ public class JiraUI {
         capability.setBrowserName("chrome");
         capability.setPlatform(Platform.LINUX);
 
-        WebDriver driver = new RemoteWebDriver(hostURL, capability);
+        WebDriver driver = new org.openqa.selenium.remote.RemoteWebDriver(hostURL, capability);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("http://soft.it-hillel.com.ua:8080/login.jsp");
         // разворачивает окно браузера
@@ -193,17 +198,19 @@ public class JiraUI {
         return driver;
 
     }
+
+
     @AfterMethod
 
     public void afterMethod(ITestResult result){
-        MyClass myClass = new MyClass();
+        Properties properties = new Properties();
         try{
             if(result.getStatus() == ITestResult.SUCCESS){
                 //Do something here
             }
             else if(result.getStatus() == ITestResult.FAILURE){
                 //Do something here
-                myClass.screen(driver, "_FAILED_"+result.getName());
+                properties.screen(driver, "_FAILED_"+result.getName());
             }
             else if(result.getStatus() == ITestResult.SKIP ){
                 //Do something here

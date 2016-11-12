@@ -7,15 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.MyClass;
-
-import java.util.concurrent.TimeUnit;
+import utils.Properties;
 
 public class UpdateIssuePage {
 
     String issueKey = "";
     private WebDriver driver;
-    MyClass myClass = new MyClass();
+    Properties properties = new Properties();
 
 
 
@@ -25,7 +23,7 @@ public class UpdateIssuePage {
 
     public void updateReporter() {
         driver.get("http://soft.it-hillel.com.ua:8080/browse/" + issueKey);
-        myClass.scrollPageUp(driver);
+        properties.scrollPageUp(driver);
 
 
       /*  driver.findElement(By.xpath("//*[@id='issue_summary_reporter_katherinebilous']")).click();
@@ -44,7 +42,7 @@ public class UpdateIssuePage {
 
     public void updatePriority() {
         driver.get("http://soft.it-hillel.com.ua:8080/browse/" + issueKey);
-        myClass.scrollPageUp(driver);
+        properties.scrollPageUp(driver);
         WebElement priority = driver.findElement(By.xpath("//*[@id='priority-val']"));
 
         priority.click();
