@@ -37,7 +37,7 @@ public class TestListener implements ITestListener {
         System.out.println("Screesnshot captured for test case:" + tr.getMethod().getMethodName());
         File screen = captureScreenshot((WebDriver) RemoteDriverManager.getDriver());
         try {
-            FileUtils.copyFile(screen, new File("\"C:\\Users\\Kate\\Desktop\\screenshots\\" + tr.getMethod().getMethodName() + ".png"));
+            FileUtils.copyFile(screen, new File("C:/Users/Kate/Desktop/screenshots/" + tr.getMethod().getMethodName() + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class TestListener implements ITestListener {
         System.out.println("Screesnshot captured for test case:" + tr.getMethod().getMethodName());
         File screen = captureScreenshot((WebDriver) RemoteDriverManager.getDriver());
         try {
-            FileUtils.copyFile(screen, new File("\"C:\\Users\\Kate\\Desktop\\screenshots\\" + tr.getMethod().getMethodName() + ".png"));
+            FileUtils.copyFile(screen, new File("C:/Users/Kate/Desktop/screenshots/" + tr.getMethod().getMethodName() + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

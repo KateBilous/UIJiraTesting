@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.allure.annotations.Step;
 import utils.AssertionsAndWaits;
 import utils.RemoteDriverManager;
@@ -28,7 +30,10 @@ public class NewIssuePage {
         WebElement createButton = driver.findElement(By.xpath("//*[@id='create_link']"));
         createButton.click();
 
-        WebElement issueType = driver.findElement(By.xpath("//*[@id='issuetype-field']"));
+        WebElement issueType = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='issuetype-field']")));
+
+        //WebElement issueType = driver.findElement(By.xpath("//*[@id='issuetype-field']"));
 
         issueType.clear();
         issueType.sendKeys("Bug");

@@ -17,8 +17,6 @@ public class UpdateIssuePage extends BasePage {
     String issueKey = "";
     private WebDriver driver;
 
-    UpdateIssuePage updateIssuePage = new UpdateIssuePage();
-
 
     public UpdateIssuePage() {
         this.driver = RemoteDriverManager.getDriver();
@@ -27,7 +25,7 @@ public class UpdateIssuePage extends BasePage {
     @Step("update reporter")
     public void updateReporter() {
         driver.get("http://soft.it-hillel.com.ua:8080/browse/" + issueKey);
-        updateIssuePage.scrollPageUp(driver);
+        scrollPageUp(driver);
 
         driver.findElement(By.xpath(".//*[@id='reporter-val']")).click();
         driver.findElement(By.xpath(".//*[@id='reporter-field']")).sendKeys("a.a.piluck2 ", Keys.ENTER);
@@ -38,7 +36,7 @@ public class UpdateIssuePage extends BasePage {
     @Step("update priority")
     public void updatePriority() {
         driver.get("http://soft.it-hillel.com.ua:8080/browse/" + issueKey);
-        updateIssuePage.scrollPageUp(driver);
+        scrollPageUp(driver);
         WebElement priority = driver.findElement(By.xpath("//*[@id='priority-val']"));
 
         priority.click();

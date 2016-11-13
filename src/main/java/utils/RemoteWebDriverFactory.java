@@ -13,7 +13,7 @@ public class RemoteWebDriverFactory {
     public static WebDriver createInstance(String browserName) {
         URL hostURL = null;
         try {
-            hostURL = new URL("localhost:4444/wd/hub");
+            hostURL = new URL("http://localhost:4444/wd/hub");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
