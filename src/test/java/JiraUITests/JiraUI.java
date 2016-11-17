@@ -31,6 +31,8 @@ public class JiraUI {
         loginPage.enterUsername();
         loginPage.enterPassword();
         loginPage.clickLogin();
+        LogoutPage logoutPage= new LogoutPage();
+        logoutPage.Logout();
 
 
     }
