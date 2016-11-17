@@ -1,20 +1,19 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
-import static com.thoughtworks.selenium.SeleneseTestNgHelper.assertEquals;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class AssertionsAndWaits {
 
